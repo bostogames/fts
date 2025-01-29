@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<style>
+.btn-blue {
+    background-color: #007BFF !important; /* Rangi ya bluu */
+    border-color: #007BFF !important;
+    color: #fff !important; /* Rangi ya maandishi */
+}
+.btn-blue:hover {
+    background-color: #0056b3 !important; /* Bluu iliyokolea wakati wa hover */
+    border-color: #0056b3 !important;
+}
+</style>
+
+<style>
+.btn-primary {
+    background-color: #FFA500 !important; /* Chungwa angavu */
+    border-color: #FFA500 !important;
+    color: #fff !important; /* Rangi ya maandishi */
+}
+.btn-primary:hover {
+    background-color: #FF8C00 !important; /* Rangi ya chungwa zaidi wakati wa hover */
+    border-color: #FF8C00 !important;
+}
+</style>
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wachezaji Wa FTS</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.3/pako.min.js"></script>
+<script src="script_fts_P.js"></script>
+<link href="styles_P.css" rel="stylesheet"/>
+</link>
+<style>
+.btn-purple {
+    background-color: #E6E6FA !important; /* Zambarau nyepesi */
+    border-color: #D8BFD8 !important;
+    color: #4B0082 !important; /* Maandishi ya zambarau iliyokolea */
+}
+.btn-purple:hover {
+    background-color: #D8BFD8 !important; /* Zambarau ya kati wakati wa hover */
+    border-color: #4B0082 !important;
+}
+</style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+<div class="container">
+<a class="navbar-brand" href="#">Wachezaji Wa FTS</a>
+<button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item">
+<a class="nav-link" href="https://youtube.com/@le_captain_dela_wifi" target="_blank">
+<img alt="Logo" src="https://i.imgur.com/sDWvfO0.png" style="height: 30px; margin-right: 10px;"/> <!-- Ajusta la ruta y el tamaño de acuerdo a tu logo -->
+              LE CAPTAIN DELA WI-FI
+            </a>
+<a class="nav-link" href="https://youtube.com/@droicer" target="_blank">
+<img alt="Logo" src="https://i.imgur.com/a6yeslF.jpeg" style="height: 30px; margin-right: 10px;"/> <!-- Ajusta la ruta y el tamaño de acuerdo a tu logo -->
+              DROICER
+            </a>            
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="script-container">
+<div class="script-wrapper">
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '7bfddbd4dc5511768f5558914c8c1368',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/7bfddbd4dc5511768f5558914c8c1368/invoke.js"></script>
+<script type="text/javascript" src="//www.highperformanceformat.com/d2fcf5cdb4787b8e9f7379e297ebab40/invoke.js"></script>
+</div>
+</div>
+<div class="container my-4">
+<div class="card">
+<div class="card-header bg-success text-white">
+<h5 class="mb-0">Faili</h5>
+</div>
+<div class="card-body">
+<div class="mb-3">
+<input accept=".dat" class="form-control" id="fileInput" type="file"/>
+</div>
+<div class="text-center"><button class="btn btn-blue me-2" onclick="iniciarAnuncio()">Pakua</button>
+<button class="btn btn-primary mx-2" onclick="guardarArchivo()">Hifadhi</button>
+<button class="btn btn-blue ms-2" onclick="descomprimirArchivo()">Pakia Data</button>
+</div>
+<div class="mt-4" id="compressedData"></div>
+<div class="mt-4" id="decompressedData"></div>
+</div>
+</div>
+</div>
+<div class="modal" id="modal-example" style="display: none;">
+<div class="modal-content">
+<span class="close" onclick="cerrarModal()">×</span>
+<div class="advertisement">
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '9e897aa1be09c1de681c3c5764506661',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/9e897aa1be09c1de681c3c5764506661/invoke.js"></script>
+</div>
+<div id="countdown">Faili Itapakuliwa Baada Ya Sekunde <span id="counter">10</span> ...</div>
+</div>
+</div>
+<script>
+    var modal = document.getElementById("modal-example");
+    var counter = 20;
+    var interval;
+  
+    function iniciarAnuncio() {
+      modal.style.display = "block";
+      interval = setInterval(actualizarContador, 1000);
+    }
+  
+    function actualizarContador() {
+      counter--;
+      document.getElementById("counter").innerText = counter;
+      if (counter <= 0) {
+        clearInterval(interval);
+        descargar();
+      }
+    }
+  
+    function cerrarModal() {
+      modal.style.display = "none";
+      clearInterval(interval);
+      counter = 20; // Reiniciar el contador
+      document.getElementById("counter").innerText = counter;
+    }
+  
+   
+  </script>
+<div class="script-container">
+<div class="script-wrapper">
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '7bfddbd4dc5511768f5558914c8c1368',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/7bfddbd4dc5511768f5558914c8c1368/invoke.js"></script>
+</div>
+</div>
+<div class="container my-4">
+<div class="card">
+<div class="card-header bg-success text-white">
+<h5 class="mb-0">Tafuta</h5>
+</div>
+<div class="card-body">
+<div class="row mb-3">
+<div class="col-md-8">
+<input class="form-control" id="searchInput" placeholder="Tafuta Mchezaji..." type="text"/>
+</div>
+<div class="col-md-4 d-flex">
+<button class="btn btn-primary me-2" onclick="buscarJugador()">Tafuta Mchezaji</button>
+<button class="btn btn-secondary" onclick="buscarSiguiente()">Tafuta Mwingine</button>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-4">
+<input class="form-control" disabled="" id="textBox_vercion" placeholder="Toleo" type="text"/>
+</div>
+<div class="col-md-4">
+<input class="form-control" disabled="" id="textBox_total" placeholder="Idadi Ya Wachezaji" type="text"/>
+</div>
+<div class="col-md-4">
+<select class="form-select" id="playerbox"></select>
+</div>
+</div>
+<div class="row mb-3">
+<div class="col-md-4">
+<label class="form-label" for="textBox_nombre">Jina:</label>
+<input class="form-control" id="textBox_nombre" placeholder="Jina" type="text"/>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="textBox_nombre">Ficha katika uhamishaji:</label>
+<select class="form-select" id="Ocultar">
+<option value="no">hapana</option>
+<option value="si">Ndiyo</option>
+</select>
+<!-- <label for="textBox_apellido" class="form-label">Jina La Mwisho:</label> -->
+<!-- <input type="text" id="textBox_apellido" class="form-control" placeholder="Apellido" disabled> -->
+</div>
+<div class="col-md-4">
+<!-- <label for="textBox_apodo" class="form-label">Apodo:</label> -->
+<!-- <input type="text" id="textBox_apodo" class="form-control" placeholder="Apodo" disabled> -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="script-container">
+<div class="script-wrapper">
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '7bfddbd4dc5511768f5558914c8c1368',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/7bfddbd4dc5511768f5558914c8c1368/invoke.js"></script>
+</div>
+</div>
+<div class="container my-4">
+<div class="card player-card">
+<div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+<h5 class="mb-0">Data</h5>
+</div>
+<div class="card-body">
+<div class="row">
+<div class="col-md-4">
+<label class="form-label" for="nacionalidad">Utaifa au Urahia:</label>
+<select class="form-select" id="nacionalidad">
+<option value="españa">Uhispania</option>
+<option value="italia">Italia</option>
+<option value="alemania">German</option>
+<option value="holanda">Holanda</option>
+<option value="croacia">Croacia</option>
+<option value="brasil">Brasil</option>
+<option value="argentina">Argentina</option>
+<option value="rep-checa">Rep. Checa</option>
+<option value="portugal">Portugal</option>
+<option value="turquia">Turquía</option>
+<option value="francia">France</option>
+<option value="rusia">Rusia</option>
+<option value="camerun">Camerun</option>
+<option value="inglaterra">England</option>
+<option value="escocia">Escocia</option>
+<option value="grecia">Grecia</option>
+<option value="ghana">Ghana</option>
+<option value="egipto">Egypt</option>
+<option value="uruguay">Uruguay</option>
+<option value="costa-marfil">ivory coast</option>
+<option value="mexico">México</option>
+<option value="paraguay">Paraguay</option>
+<option value="nigeria">Nigeria</option>
+<option value="niger">Níger</option>
+<option value="estados-unidos">Marekani</option>
+<option value="colombia">Colombia</option>
+<option value="polonia">Polonia</option>
+<option value="suecia">Suecia</option>
+<option value="irlanda-norte">Irlanda del Norte</option>
+<option value="japon">Japón</option>
+<option value="marruecos">Marroco</option>
+<option value="irlanda">Irlanda</option>
+<option value="australia">Australia</option>
+<option value="chile">Chile</option>
+<option value="tunez">Tunisia</option>
+<option value="senegal">Senegal</option>
+<option value="iran">Irán</option>
+<option value="arabia-saudita">Arabia Saudita</option>
+<option value="corea-sur">south korea</option>
+<option value="ecuador">Ecuador</option>
+<option value="gales">Gales</option>
+<option value="honduras">Honduras</option>
+<option value="venezuela">Venezuela</option>
+<option value="sudafrica">south africa</option>
+<option value="costa-rica">Costa Rica</option>
+<option value="trinidad-tobago">Trinidad y Tobago</option>
+<option value="canada">Canadá</option>
+<option value="china">China</option>
+<option value="jamaica">Jamaica</option>
+<option value="corea-norte">Corea del Norte</option>
+<option value="barbados">Barbados</option>
+<option value="india">India</option>
+<option value="belgica">Bélgica</option>
+<option value="suiza">Suiza</option>
+<option value="dinamarca">Dinamarca</option>
+<option value="bulgaria">Bulgaria</option>
+<option value="togo">Togo</option>
+<option value="noruega">Noruega</option>
+<option value="eslovaquia">Eslovaquia</option>
+<option value="israel">Israel</option>
+<option value="ucrania">Ucrania</option>
+<option value="peru">Perú</option>
+<option value="mali">Malí</option>
+<option value="rumania">Rumania</option>
+<option value="guinea">Guinea</option>
+<option value="serbia">Serbia</option>
+<option value="montenegro">Montenegro</option>
+<option value="bosnia">Bosnia</option>
+<option value="islandia">Islandia</option>
+<option value="argelia">Argeria</option>
+<option value="hungria">Hungría</option>
+<option value="albania">Albania</option>
+<option value="zaire">Zaire (Congo)</option>
+<option value="austria">Austria</option>
+<option value="finlandia">Finlandia</option>
+<option value="malta">Malta</option>
+<option value="sierra-leona">Sierra Leona</option>
+<option value="77">77</option>
+<option value="78">78</option>
+<option value="nueva-zelanda">Nueva Zelanda</option>
+<option value="georgia">Georgia</option>
+<option value="81">81</option>
+<option value="macedonia">Macedonia</option>
+<option value="letonia">Letonia</option>
+<option value="yugoslavia">Yugoslavia</option>
+<option value="oman">Omán</option>
+<option value="eslovenia">Eslovenia</option>
+<option value="87">87</option>
+<option value="bielorrusia">Bielorrusia</option>
+<option value="lituania">Lituania</option>
+<option value="90">90</option>
+<option value="cabo-verde">Cabo Verde</option>
+<option value="92">92</option>
+<option value="93">93</option>
+<option value="gabon">Gabón</option>
+<option value="burkina-faso">Burkina Faso</option>
+<option value="guatemala">Guatemala</option>
+<option value="97">97</option>
+<option value="bolivia">Bolivia</option>
+<option value="99">99</option>
+<option value="100">100</option>
+<option value="el-salvador">El Salvador</option>
+<option value="haiti">Haití</option>
+<option value="103">103</option>
+<option value="san-cristobal-nieves">San Cristóbal y Nieves</option>
+<option value="105">105</option>
+<option value="armenia">Armenia</option>
+<option value="estonia">Estonia</option>
+<option value="108">108</option>
+<option value="109">109</option>
+<option value="chipre">Chipre</option>
+<option value="moldavia">Moldavia</option>
+<option value="112">112</option>
+<option value="kosovo">Kosovo</option>
+<option value="114">114</option>
+<option value="bermudas">Bermudas</option>
+<option value="116">116</option>
+<option value="uzbekistan">Uzbekistán</option>
+<option value="panama">Panamá</option>
+<option value="kazajistan">Kazajistán</option>
+<option value="san-marino">San Marino</option>
+<option value="rd-del-congo">RD del Congo</option>
+<option value="kuwait">Kuwait</option>
+<option value="lichtenstein">Liechtenstein</option>
+<option value="azerbaiyan">Azerbaiyán</option>
+<option value="luxemburgo">Luxemburgo</option>
+<option value="libia">Libia</option>
+<option value="zambia">Zambia</option>
+<option value="guyana">Guyana</option>
+<option value="antigua-barbuda">Antigua y Barbuda</option>
+<option value="irak">Irak</option>
+<option value="jordania">Jordania</option>
+<option value="qatar">Qatar</option>
+<option value="barein">Baréin</option>
+<option value="134">134</option>
+<option value="135">135</option>
+<option value="136">136</option>
+<option value="137">137</option>
+<option value="138">138</option>
+<option value="139">139</option>
+<option value="140">140</option>
+<option value="141">141</option>
+<option value="142">142</option>
+<option value="143">143</option>
+<option value="144">144</option>
+<option value="145">145</option>
+<option value="146">146</option>
+<option value="147">147</option>
+<option value="148">148</option>
+<option value="149">149</option>
+<option value="150">150</option>
+<option value="151">151</option>
+<option value="152">152</option>
+<option value="153">153</option>
+<option value="154">154</option>
+<option value="155">155</option>
+<option value="156">156</option>
+<option value="157">157</option>
+<option value="158">158</option>
+<option value="159">159</option>
+<option value="160">160</option>
+<option value="161">161</option>
+<option value="162">162</option>
+<option value="163">163</option>
+<option value="164">164</option>
+<option value="165">165</option>
+<option value="166">166</option>
+<option value="167">167</option>
+<option value="168">168</option>
+<option value="169">169</option>
+<option value="170">170</option>
+<option value="171">171</option>
+<option value="172">172</option>
+<option value="173">173</option>
+<option value="174">174</option>
+<option value="175">175</option>
+<option value="176">176</option>
+<option value="177">177</option>
+<option value="178">178</option>
+<option value="179">179</option>
+<option value="180">180</option>
+<option value="181">181</option>
+<option value="182">182</option>
+<option value="183">183</option>
+<option value="184">184</option>
+<option value="185">185</option>
+<option value="186">186</option>
+<option value="187">187</option>
+<option value="188">188</option>
+<option value="189">189</option>
+<option value="190">190</option>
+<option value="191">191</option>
+<option value="192">192</option>
+<option value="193">193</option>
+<option value="194">194</option>
+<option value="195">195</option>
+<option value="196">196</option>
+<option value="197">197</option>
+<option value="198">198</option>
+<option value="199">199</option>
+<option value="200">200</option>
+<option value="201">201</option>
+<option value="202">202</option>
+<option value="203">203</option>
+<option value="204">204</option>
+<option value="205">205</option>
+<option value="206">206</option>
+<option value="207">207</option>
+<option value="208">208</option>
+<option value="209">209</option>
+<option value="210">210</option>
+<option value="211">211</option>
+<option value="212">212</option>
+<option value="213">213</option>
+<option value="214">214</option>
+<option value="215">215</option>
+<option value="216">216</option>
+<option value="217">217</option>
+<option value="218">218</option>
+<option value="219">219</option>
+<option value="220">220</option>
+<option value="221">221</option>
+<option value="222">222</option>
+<option value="223">223</option>
+<option value="224">224</option>
+<option value="225">225</option>
+<option value="226">226</option>
+<option value="227">227</option>
+<option value="228">228</option>
+<option value="229">229</option>
+<option value="230">230</option>
+<option value="231">231</option>
+<option value="232">232</option>
+<option value="233">233</option>
+<option value="234">234</option>
+<option value="235">235</option>
+<option value="236">236</option>
+<option value="237">237</option>
+<option value="238">238</option>
+<option value="239">239</option>
+<option value="240">240</option>
+<option value="241">241</option>
+<option value="242">242</option>
+<option value="243">243</option>
+<option value="244">244</option>
+<option value="245">245</option>
+<option value="246">246</option>
+<option value="247">247</option>
+<option value="248">248</option>
+<option value="249">249</option>
+<option value="250">250</option>
+<option value="251">251</option>
+<option value="252">Somalia</option>
+<option value="253">Djibouti</option>
+<option value="254">Kenya</option>
+<option value="255">Tanzania</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="pie_dominante">Mguu Mkuu:</label>
+<select class="form-select" id="pie_dominante">
+<option value="Izquierdo">Wa Kushoto</option>
+<option value="Derecho">Wa Kulia</option>
+<option value="ambos-d">Yote Miwili (Kulia)</option>
+<option value="ambos-i">Yote Miwili (Kushoto)</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="posicion">Nafasi:</label>
+<select class="form-select" id="posicion">
+<option value="PO">Kipa</option>
+<option value="AIZ">beki wa Kushoto</option>
+<option value="ADR">beki wa Kulia</option>
+<option value="PIZ">beki wa Kushoto wa kipa</option>
+<option value="PDR">Beki wa Kulia wa Kipa</option>
+<option value="CIZ">Beki wa kushoto wa ulizi </option>
+<option value="CBC">Kiungo wa kati</option>
+<option value="CDR">Kiungo wa Kulia</option>
+<option value="CDC">Kiungo wa kati wa ulinzi</option>
+<option value="CDD">Kiungo wa kulia wa ulinzi</option>
+<option value="CDI">Kiungo wa kushoto wa ulinzi</option>
+<option value="CC">Kiungo wa Kati</option>
+<option value="CI">Kiungo wa Kushoto</option>
+<option value="CD">Kiungo wa Kushoto</option>
+<option value="CAI">Kiungo mkabaji wa kushoto</option>
+<option value="CAD">Kiungo mkabaji wa kushoto</option>
+<option value="ED">kati kulia</option>
+<option value="EZ">Kati kushoto</option>
+<option value="CAC">Kiungo mshambuliaji wa kati</option>
+<option value="DC">mbele kati-a</option>
+<option value="DI">Mbele kushoto</option>
+<option value="DD">Mbele Kulia</option>
+<option value="PUN">Mbele kati-b</option>
+</select>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-md-2">
+<label class="form-label" for="dia">Tarehe:</label>
+<input class="form-control text-center" id="dia" placeholder="DD" type="text"/>
+</div>
+<div class="col-md-2">
+<label class="form-label" for="mes">Mwezi:</label>
+<input class="form-control text-center" id="mes" placeholder="MM" type="text"/>
+</div>
+<div class="col-md-2">
+<label class="form-label" for="ano">Mwaka:</label>
+<input class="form-control text-center" id="ano" placeholder="AAAA" type="text"/>
+</div>
+<div class="col-md-3">
+<label class="form-label" for="estatura">Kimo (cm):</label>
+<input class="form-control text-center" id="estatura" type="text"/>
+</div>
+<div class="col-md-3">
+<label class="form-label" for="peso">Uzito (kg):</label>
+<input class="form-control text-center" id="peso" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="script-container">
+<div class="script-wrapper">
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '7bfddbd4dc5511768f5558914c8c1368',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/7bfddbd4dc5511768f5558914c8c1368/invoke.js"></script>
+</div>
+</div>
+<div class="container my-4">
+<div class="card player-card">
+<div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+<h5 class="mb-0">Takwimu</h5>
+</div>
+<div class="card-body">
+<div class="row">
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-tachometer-alt"></i></span>
+<label class="form-label" for="textBox_velocidad">Kasi:</label>
+<input class="form-control text-center" id="textBox_velocidad" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-bolt"></i></span>
+<label class="form-label" for="textBox_aceleracion">Kasi Ya Mchezaji:</label>
+<input class="form-control text-center" id="textBox_aceleracion" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-running"></i></span>
+<label class="form-label" for="textBox_reistencia">Uvumilivu:</label>
+<input class="form-control text-center" id="textBox_reistencia" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-hand-paper"></i></span>
+<label class="form-label" for="textBox_control">Udhibiti Wa Mpira:</label>
+<input class="form-control text-center" id="textBox_control" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-futbol"></i></span>
+<label class="form-label" for="textBox_potencia">Nguvu:</label>
+<input class="form-control text-center" id="textBox_potencia" type="text" value="0"/>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-sign-in-alt"></i></span>
+<label class="form-label" for="textBox_entrada">Ingång:</label>
+<input class="form-control text-center" id="textBox_entrada" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-exchange-alt"></i></span>
+<label class="form-label" for="textBox_pase">Pase:</label>
+<input class="form-control text-center" id="textBox_pase" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-crosshairs"></i></span>
+<label class="form-label" for="textBox_centro">Kituo:</label>
+<input class="form-control text-center" id="textBox_centro" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-bullseye"></i></span>
+<label class="form-label" for="textBox_dispario">Shuti:</label>
+<input class="form-control text-center" id="textBox_dispario" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-head-side-virus"></i></span>
+<label class="form-label" for="textBox_cabeza">Kichwa:</label>
+<input class="form-control text-center" id="textBox_cabeza" type="text" value="0"/>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-golf-ball"></i></span>
+<label class="form-label" for="textBox_balon_parado">Umiliki Wa Mpira:</label>
+<input class="form-control text-center" id="textBox_balon_parado" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-hand-sparkles"></i></span>
+<label class="form-label" for="textBox_paradas_PO">Uokoaji Wa Kipa:</label>
+<input class="form-control text-center" id="textBox_paradas_PO" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-hand-paper"></i></span>
+<label class="form-label" for="textBox_manejo_PO">Ulinzi Wa Kipa:</label>
+<input class="form-control text-center" id="textBox_manejo_PO" type="text" value="0"/>
+</div>
+<div class="col-md-2 stat-item">
+<span class="stat-icon"><i class="fas fa-user-astronaut"></i></span>
+<label class="form-label" for="textBox_precencia_PO">Kipa Kulinda Lango:</label>
+<input class="form-control text-center" id="textBox_precencia_PO" type="text" value="0"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="script-container">
+<div class="script-wrapper">
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '7bfddbd4dc5511768f5558914c8c1368',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/7bfddbd4dc5511768f5558914c8c1368/invoke.js"></script>
+</div>
+</div>
+<div class="container my-4">
+<div class="card player-card">
+<div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+<h5 class="mb-0">Mwonekano</h5>
+</div>
+<div class="card-body">
+<div class="row">
+<div class="col-md-4">
+<label class="form-label" for="color_piel">Rangi Ya Ngozi:</label>
+<select class="form-select" id="color_piel">
+<option value="blanco">Nyeupe</option>
+<option value="rojizo">Nyekundu</option>
+<option value="negro_claro">Nyeusi Ya Kawaida</option>
+<option value="negro_medio">Nyeusi Ya Kati</option>
+<option value="negro_oscuro">Nyeusi Iliokolea</option>
+<option value="amarillo">Nyano</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="color_cabello">Rangi Ya Nywele:</label>
+<select class="form-select" id="color_cabello">
+<option value="negro">Nyeusi</option>
+<option value="castaño">Chestnut</option>
+<option value="castaño_claro">Chestnut Isiyokolea</option>
+<option value="castaño_oscuro">Chestnut Iliyokolea</option>
+<option value="rubio_claro">blonde Ya Kawaida</option>
+<option value="rubio_oscuro">blonde iliyokolea</option>
+<option value="rojizo">Nyekundu</option>
+<option value="gris">Gris</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="tipo_cabello">Aina Ya Nywele:</label>
+<select class="form-select" id="tipo_cabello">
+<option value="calvo">Upara</option>
+<option value="mohicano">Mohican</option>
+<option value="corto_entradas">Fupi Na</option>
+<option value="mohicano_largo">mohawk ndefu</option>
+<option value="lacio_atras">Zilizo Rudishwa Nyuma</option>
+<option value="rapado">Kunyolewa Kawaida</option>
+<option value="lacio_corto">Fupi Za Kawaida</option>
+<option value="rizo_medio">Curl ya kati</option>
+<option value="lacio_medio">Nyoofu Ya Kati</option>
+<option value="rizo_hombros">Curl ya mabega</option>
+<option value="mohicano_corto">mohawk fupi</option>
+<option value="cola_caballo">Cola de caballo</option>
+<option value="rizo_corto">curl fupi</option>
+<option value="copete">Pompadour</option>
+<option value="lacio_hombros">Zilizo Ishia Kwenye Bega</option>
+<option value="rastas_hombros">Rasta Zilizo Ishia Kwenye Bega</option>
+<option value="afro">Afro</option>
+</select>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-md-4">
+<label class="form-label" for="tipo_barba">Aina Ya Ndevu:</label>
+<select class="form-select" id="tipo_barba">
+<option value="ninguna">Hakuna</option>
+<option value="bigote">Masharubu</option>
+<option value="candado">Kufuli</option>
+<option value="delineada">Imeainishwa</option>
+<option value="cerrada">Iliofungwa</option>
+<option value="cerrada_larga">Cerrada larga</option>
+<option value="patillas">Sideburns</option>
+<option value="cerrada_corta">Imefungwa</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="tono_piel">Namba Ya Ngozi:</label>
+<select class="form-select" id="tono_piel">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="2">3</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="tipo_de_mangas">Mikono:</label>
+<select class="form-select" id="tipo_de_mangas">
+<option value="aleatorio">Nasibu</option>
+<option value="cortas">Mfupi</option>
+<option value="largas">Mrefu</option>
+</select>
+</div>
+</div>
+<div class="row mt-3">
+<div class="col-md-4">
+<label class="form-label" for="color_botines">Rangi Ya Buti:</label>
+<select class="form-select" id="color_botines">
+<option value="negro">Nyeusi</option>
+<option value="blanco">Nyeupe</option>
+<option value="dorado">Dhahabu</option>
+<option value="rojo">Nyekundu</option>
+<option value="azul">Bluu</option>
+<option value="rosa">Pink</option>
+<option value="amarillo">Njano</option>
+<option value="naranja">Orange</option>
+<option value="morado">Zambarau</option>
+<option value="cafe">Kahawa</option>
+<option value="verde">Kijani</option>
+<option value="aleatorio">Nasibu</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="color_guantes">Rangi Ya Gloves:</label>
+<select class="form-select" id="color_guantes">
+<option value="azul">Bluu</option>
+<option value="rojo">Nyekundu</option>
+<option value="verde">Kijani</option>
+<option value="amarillo">Njano</option>
+<option value="negro">Nyeusi</option>
+<option value="No">Hakuna</option>
+</select>
+</div>
+<div class="col-md-4">
+<label class="form-label" for="tipo_cabeza">aina ya kichwa:</label>
+<select class="form-select" id="tipo_cabeza">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="script-container">
+<div class="script-wrapper">
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '7bfddbd4dc5511768f5558914c8c1368',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/7bfddbd4dc5511768f5558914c8c1368/invoke.js"></script>
+</div>
+</div>
+<div class="container my-4">
+
+</div>
+<script type='text/javascript' src='//pl25269893.profitablecpmrate.com/85/14/43/851443aca089a66cd593b6fe21695ed1.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
